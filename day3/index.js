@@ -37,7 +37,7 @@ for (let i = 0; i < rucksacksArray.length; i += 3) {//first time ever used IN HI
 	let array = [rucksacksArray[i], rucksacksArray[i + 1], rucksacksArray[i + 2]]
 	let found = false
 	rucksacksArray[i].split("").forEach((letter) => {
-		if (rucksacksArray[i + 1].indexOf(letter) != -1 && rucksacksArray[i + 2].indexOf(letter) != -1 && !found) {
+		if (array[1].indexOf(letter) != -1 && array[2].indexOf(letter) != -1 && !found) {
 			priority += getPriority(letter)
 			found = true
 		}
