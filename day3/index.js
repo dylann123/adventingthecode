@@ -33,7 +33,7 @@ compartments.forEach((rucksack) => {
 console.log("part 1: " + priority);
 // part 2
 priority = 0
-for (let i = 0; i < rucksacksArray.length; i += 3) {//first time ever used IN HISTORY
+for (let i = 0; i < rucksacksArray.length; i += 3) {//first time ever used IN HISTORY like bro
 	let array = [rucksacksArray[i], rucksacksArray[i + 1], rucksacksArray[i + 2]]
 	let found = false
 	rucksacksArray[i].split("").forEach((letter) => {
