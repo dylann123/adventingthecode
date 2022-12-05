@@ -1,5 +1,6 @@
 # advent of code 2022
-please do not use these solutions
+
+not the best solutions out there
 
 its embarassing to show this to the world
 
