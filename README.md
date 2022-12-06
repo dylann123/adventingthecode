@@ -8,4 +8,4 @@ probably in oh uv en keyubed time
 
 made with love (and node.js)
 
-check out the advent of code [here](https://adventofcode.com/2022)
+check out this year's advent of code [here](https://adventofcode.com/2022)
