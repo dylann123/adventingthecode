@@ -9,48 +9,100 @@ for (let line in rawDataSplit) {
 			trees[trees.length - 1].push(parseInt(number))
 	}
 }
+
 // part 1
 let count = 0
-function getTreeVisibility(x, y, array) {
+function getTreeVisibility(x, y) {
 	let visible = {
 		top: true,
-		bottom: true,
+		bot: true,
 		left: true,
 		right: true
 	}
-	// vertical check
-	// for (let tree in array) {
-	// 	// if tree we are checking is above
-	// 	if (array[tree][x] >= array[y][x])
-	// 		if (tree < y) {
-	// 			visible.top = false
-	// 		} else if (tree > y) { // skip current tree
-	// 			visible.bottom = false
-	// 		}
-	// }
-	// // horizontal check
-	// for (let tree in array[y]) {
-	// 	// if tree we are checking is left
-	// 	if (array[y][tree] >= array[y][x]) {
-	// 		if (tree < x) {
-	// 			visible.left = false
-	// 		} else if (tree > x) {
-	// 			visible.right = false
-	// 		}
-	// 	}
-	// }
-	for(let treerow in array){
-		
+	let index = 0
+	for (i of trees[y]) {
+		if (i >= trees[y][x]) {
+			if (index > x) {
+				visible.right = false
+			} else if (index < x) {
+				visible.left = false
+			}
+		}
+		index += 1
 	}
-	let returnval = (visible.top || visible.bottom || visible.left || visible.right)
-	if (returnval) console.log(array[y][x]);
-	// console.log(`${array[y][x]} - top: ${visible.top} bottom: ${visible.bottom} left: ${visible.left} right: ${visible.right}`);
-	return returnval
+
+	index = 0
+	for (i of trees) {
+		if (i[x] >= trees[y][x]) {
+			if (index > y) {
+				visible.bot = false
+			} else if (index < y) {
+				visible.top = false
+			}
+		}
+		index += 1
+	}
+	return visible.bot || visible.top || visible.left || visible.right
 }
 for (let y in trees) {
 	for (let x in trees[0]) {
-		count += (getTreeVisibility(x, y, trees)) ? 1 : 0
+		if (getTreeVisibility(x, y))
+			count++
 	}
 }
-console.log(count);
+console.log("part 1: "+count);
+// part 2
+let highestscore = 0
+function getScore(x, y) {
+	let viewDistance = {
+		left: 0,
+		right: 0,
+		up: 0,
+		down: 0
+	}
+	for (let treeX in trees[y]) {
+		if (treeX < x) {
+			if (trees[y][treeX] >= trees[y][x]) {
+				viewDistance.left = 1
+			} else {
+				viewDistance.left++
+			}
+		} else if (treeX > x) {
+			if (trees[y][treeX] >= trees[y][x]) {
+				viewDistance.right++
+				break
+			} else {
+				viewDistance.right++
+			}
+		}
+	}
+	for (let treeY in trees) {
+		if (treeY < y) {
+			if (trees[treeY][x] >= trees[y][x]) {
+				viewDistance.up = 1
+			} else {
+				viewDistance.up++
+			}
+		} else if (treeY > y) {
+			if (trees[treeY][x] >= trees[y][x]) {
+				viewDistance.down++
+				break
+			} else {
+				viewDistance.down++
+			}
+		}
+	}
+	let output = viewDistance.left * viewDistance.right * viewDistance.up * viewDistance.down
+	console.log(`(${x},${y}) ${trees[y][x]} | ${viewDistance.left} ${viewDistance.right} ${viewDistance.up} ${viewDistance.down}\t${output}`);
+	return output
+}
+for (let y in trees) {
+	for (let x in trees[0]) {
+		let score = getScore(x, y)
+		if(score > highestscore)
+			highestscore = score
+	}
+}
+console.log("part 2: "+highestscore);
+
 debugger
