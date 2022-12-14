@@ -60,7 +60,7 @@ function getScore(x, y) {
 		up: 0,
 		down: 0
 	}
-	for (let treeX in trees[y]) {
+	for (let treeX = 0; treeX < trees[y].length; treeX++) {
 		if (treeX < x) {
 			if (trees[y][treeX] >= trees[y][x]) {
 				viewDistance.left = 1
@@ -74,9 +74,11 @@ function getScore(x, y) {
 			} else {
 				viewDistance.right++
 			}
+		} else{
+			console.log(treeX == x);
 		}
 	}
-	for (let treeY in trees) {
+	for (let treeY = 0; treeY < trees.length; treeY++) {
 		if (treeY < y) {
 			if (trees[treeY][x] >= trees[y][x]) {
 				viewDistance.up = 1
@@ -93,7 +95,7 @@ function getScore(x, y) {
 		}
 	}
 	let output = viewDistance.left * viewDistance.right * viewDistance.up * viewDistance.down
-	console.log(`(${x},${y}) ${trees[y][x]} | ${viewDistance.left} ${viewDistance.right} ${viewDistance.up} ${viewDistance.down}\t${output}`);
+	console.log(`(${x},${y}) ${trees[y][x]} | ${viewDistance.right} ${viewDistance.left} ${viewDistance.down} ${viewDistance.up}\t${output}`);
 	return output
 }
 for (let y in trees) {
