@@ -74,8 +74,6 @@ function getScore(x, y) {
 			} else {
 				viewDistance.right++
 			}
-		} else{
-			console.log(treeX == x);
 		}
 	}
 	for (let treeY = 0; treeY < trees.length; treeY++) {
@@ -95,7 +93,7 @@ function getScore(x, y) {
 		}
 	}
 	let output = viewDistance.left * viewDistance.right * viewDistance.up * viewDistance.down
-	console.log(`(${x},${y}) ${trees[y][x]} | ${viewDistance.right} ${viewDistance.left} ${viewDistance.down} ${viewDistance.up}\t${output}`);
+	// console.log(`(${x},${y}) ${trees[y][x]} | ${viewDistance.right} ${viewDistance.left} ${viewDistance.down} ${viewDistance.up}\t${output}`);
 	return output
 }
 for (let y in trees) {
